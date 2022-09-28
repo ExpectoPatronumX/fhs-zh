@@ -47,7 +47,9 @@ LSB Workgroup, The Linux Foundation
    development tools, and scripts as well as greater uniformity of
    documentation for these systems.
 
-   这个标准
+   这个标准包含一系列在类UNIX系统下文件和文件夹放置的指导和要求。
+   这些准则旨在支持应用程序的互操作性、系统管理工具、
+   开发工具和脚本以及更大的统一性这些系统的文档。
      __________________________________________________________
 
 Dedication
@@ -60,59 +62,93 @@ Dedication
    Table of Contents
 
    1. Introduction
+   1. 介绍
 
         1.1. Purpose
+        1.1. 目的
         1.2. Conventions
+        1.2. 约定惯例
 
    2. The Filesystem
+   2. 文件系统
    3. The Root Filesystem
+   3. 根文件系统
 
         3.1. Purpose
+        3.1. 目的
         3.2. Requirements
+        3.2. 要求
         3.3. Specific Options
+        3.3. 特定的选项
         3.4. /bin : Essential user command binaries (for use by
                 all users)
+        3.4. /bin : 必要的用户命令的二进制文件（所有用户可用）
 
               3.4.1. Purpose
+              3.4.1. 目的
               3.4.2. Requirements
+              3.4.2. 要求
               3.4.3. Specific Options
+              3.4.3. 特定选项
 
         3.5. /boot : Static files of the boot loader
+        3.5. /boot : 启动加载器需要的静态文件
 
               3.5.1. Purpose
+              3.5.1. 目的
               3.5.2. Specific Options
+              3.5.2. 特定选项
 
         3.6. /dev : Device files
+        3.6. /dev : 设备文件
 
               3.6.1. Purpose
+              3.6.1. 目的
               3.6.2. Specific Options
+              3.6.2. 特定选项
 
         3.7. /etc : Host-specific system configuration
+        3.7. /etc : 系统配置文件
 
               3.7.1. Purpose
+              3.7.1. 目的
               3.7.2. Requirements
+              3.7.2. 要求
               3.7.3. Specific Options
+              3.7.3. 特定选项
               3.7.4. /etc/opt : Configuration files for /opt
+              3.7.4. /etc/opt : /opt的配置文件
               3.7.5. /etc/X11 : Configuration for the X Window
                       System (optional)
+              3.7.5. /etc/X11 : X图形系统的配置文件（可选的）
 
               3.7.6. /etc/sgml : Configuration files for SGML
                       (optional)
+              3.7.6. /etc/sgml : SGML的配置文件（可选的）
 
               3.7.7. /etc/xml : Configuration files for XML
                       (optional)
+              3.7.7. /etc/xml : XML的配置文件（可选的）
 
         3.8. /home : User home directories (optional)
+        3.8. /home : 用户的"家"目录（可选的）
 
               3.8.1. Purpose
+              3.8.1. 目的
               3.8.2. Requirements
+              3.8.2. 要求
               3.8.3. Home Directory Specifications and Conventions
+              3.8.3. “家”目录的特定选项和约定惯例
 
         3.9. /lib : Essential shared libraries and kernel modules
+        3.9. /lib : 必要的共享库文件和内核模块
 
               3.9.1. Purpose
+              3.9.1. 目的
               3.9.2. Requirements
+              3.9.2. 要求
               3.9.3. Specific Options
+              3.9.3. 特定选项
 
         3.10. /lib<qual> : Alternate format essential shared
                 libraries (optional)
@@ -342,54 +378,77 @@ Dedication
         7.6. Contributors
 
 Chapter 1. Introduction
+第一章. 介绍
 
    Table of Contents
+   目录
 
    1.1. Purpose
+   1.1. 目的
    1.2. Conventions
+   1.2. 约定惯例
 
 1.1. Purpose
+1.1. 目的
 
    This standard enables:
+   这个标准能够起到以下作用：
      * Software to predict the location of installed files and
        directories, and
+     * 软件可以预测安装的文件和文件夹的位置
      * Users to predict the location of installed files and
        directories.
+     * 用户可以预测安装的文件和文件夹的位置
 
    We do this by:
+   我们通过以下方式实现上面的作用：
      * Specifying guiding principles for each area of the
        filesystem,
+     * 为文件系统中的每一个区域指定特定的用途和指导
      * Specifying the minimum files and directories required,
+     * 确定需要的最少的文件和文件夹
      * Enumerating exceptions to the principles, and
+     * 列举基本原则之外的特殊状况
      * Enumerating specific cases where there has been historical
        conflict.
+     * 列举一些与历史上的习惯不兼容的场景
 
    The FHS document is used by:
+   FHS文档主要被下列人员使用：
      * Independent software suppliers to create applications which
        are FHS compliant, and work with distributions which are
        FHS compliant,
+     * 独立的软件开发者可以发行符合FHS的软件
      * OS creators to provide systems which are FHS compliant, and
+     * 系统制作者可以提供符合FHS的系统
      * Users to understand and maintain the FHS compliance of a
        system.
+     * 想要理解并维持系统符合FHS的用户
 
    The FHS document has a limited scope:
+   FHS文档有下面十分受限的应用场景：
      * Local placement of local files is a local issue, so FHS
        does not attempt to usurp system administrators.
+     * 本地的文件的放置是本地自己的事，FSH并不会干扰系统管理员的行为
      * FHS addresses issues where file placements need to be
        coordinated between multiple parties such as local sites,
        distributions, applications, documentation, etc.
+     * FHS强调了在多用户环境下需要注意的问题，比如本地网站，发行版，应用，文档等。
 
 1.2. Conventions
+1.2. 约定惯例
 
    We recommend that you read a typeset version of this document
    rather than the plain text version. In the typeset version, the
    names of files and directories are displayed in a
    constant-width font.
+   我们推荐拟阅读本文档的具有格式的版本，而不是一个纯文本文件（虽然为了方便翻译，我就是采用的纯文本文件）。在有格式的版本当中，文件名和路径是使用等宽字体显示的。
 
    Components of filenames that vary are represented by a
    description of the contents enclosed in "<" and ">" characters,
    <thus>. Electronic mail addresses are also enclosed in "<" and
    ">" but are shown in the usual typeface.
+
 
    Optional components of filenames are enclosed in "[" and "]"
    characters and may be combined with the "<" and ">" convention.
