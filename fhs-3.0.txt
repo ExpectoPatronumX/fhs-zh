@@ -448,6 +448,7 @@ Chapter 1. Introduction
    description of the contents enclosed in "<" and ">" characters,
    <thus>. Electronic mail addresses are also enclosed in "<" and
    ">" but are shown in the usual typeface.
+   文件名的不同组合是由被“<”和“>”包裹起来的描述内容代表的，<thus>。电子邮箱地址也是用“<”和“>”包裹起来的，但是使用有用的字体展现。
 
 
    Optional components of filenames are enclosed in "[" and "]"
@@ -455,18 +456,23 @@ Chapter 1. Introduction
    For example, if a filename is allowed to occur either with or
    without an extension, it might be represented by
    <filename>[.<extension>].
+   文件名的可选部分是由“[”和“]”包裹起来的字符，并且可能组合使用“<”和“>”。例如，如果一个文件名是允许包含或者不包含扩展名的，它可能是由下面这种方式表示的：<filename>[.<extension>]。
 
    Variable substrings of directory names and filenames are
    indicated by "*".
+   文件名和文件夹名中可变的字符串是由“*”表示的。
 
    The sections of the text marked as Rationale are explanatory
    and are non-normative.
+   这部分文字
 
 Chapter 2. The Filesystem
+第二章. 文件系统
 
    This standard assumes that the operating system underlying an
    FHS-compliant file system supports the same basic security
    features found in most UNIX filesystems.
+   本标准假设使用符合FHS标准的操作系统是支持大多数UNIX文件系统的基本安全特征的。
 
    It is possible to define two independent distinctions among
    files: shareable vs. unshareable and variable vs. static. In
@@ -474,11 +480,13 @@ Chapter 2. The Filesystem
    be located in different directories. This makes it easy to
    store files with different usage characteristics on different
    filesystems.
+   在各种文件中定义两个独立的差异是可能的：可分享的与不可分享的，动态的和静态的。总的来说，文件在这些方面有不同的应该放置在不同的分类当中。这就使得在不同的文件系统上保存不同用途的字符是十分方便的。
 
    "Shareable" files are those that can be stored on one host and
    used on others. "Unshareable" files are those that are not
    shareable. For example, the files in user home directories are
    shareable whereas device lock files are not.
+   “可分享”的文件就是哪些能被存储在host上并且其他人也可以使用的文件。“不可分享的”文件就是哪些不能够分享的文件。
 
    "Static" files include binaries, libraries, documentation files
    and other files that do not change without system administrator
