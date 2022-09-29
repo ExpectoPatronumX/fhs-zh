@@ -486,13 +486,15 @@ Chapter 2. The Filesystem
    used on others. "Unshareable" files are those that are not
    shareable. For example, the files in user home directories are
    shareable whereas device lock files are not.
-   “可分享”的文件就是哪些能被存储在host上并且其他人也可以使用的文件。“不可分享的”文件就是哪些不能够分享的文件。
+   “可分享”的文件就是哪些能被存储在host上并且其他人也可以使用的文件。“不可分享的”文件就是哪些不能够分享的文件。例如，在用户“家”目录下的可分享文件而文件锁文件是不能的。
 
    "Static" files include binaries, libraries, documentation files
    and other files that do not change without system administrator
    intervention. "Variable" files are files that are not static.
+   “静态”文件包含二进制文件，库文件，文档文件以及其他的只有系统管理员有权利改变的文件。“动态”文件是哪些不是静态的文件。
 
 Rationale
+原理
 
    Shareable files can be stored on one host and used on several
    others. Typically, however, not all files in the filesystem
@@ -501,11 +503,13 @@ Rationale
    all the files a system requires that are stored on a foreign
    host can be made available by mounting one or a few directories
    from the foreign host.
+   可分享文件可以存储在一个HOST上并且被其他的用户使用。典型来说，尽管并不是所有的文件分层系统上的文件都是可分享的，并且每一个系统都有包含至少他自己的本地文件。如果一个系统所必须的所有文件都是存储在另一个host长，就使得挂载远程host的文件是可行的。
 
    Static and variable files should be segregated because static
    files, unlike variable files, can be stored on read-only media
    and do not need to be backed up on the same schedule as
    variable files.
+   静态文件应该是分割开的因为静态文件和动态文件有较大不同，静态文件可以被存储到只读的媒介当中，并且不需要像动态文件一样需要定期备份。
 
    Historical UNIX-like filesystem hierarchies contained both
    static and variable files under both /usr and /etc. In order to
@@ -515,123 +519,191 @@ Rationale
    a separate filesystem). Variable files have been transferred
    from /etc to /var over a longer period as technology has
    permitted.
+   历史上类UNIX的文件系统在/usr和/etc都保存动态和静态文件。为了指出我们刚才提到的分开存储的优越性，/var的分层文件系统被创造了，并且所有的动态文件都从/usr下改变到了/var文件下。所以现在/usr可以被挂载为只读的（前提是单独分区了）。动态文件也从/etc转移到了/var在科技允许的的很长一段时间内。
 
    Here is an example of a FHS-compliant system. (Other
    FHS-compliant layouts are possible.)
+   这里有一个符合FHS标准的文件系统的例子（其他的符合标准的布局也是可能的）
             shareable       unshareable
    static   /usr            /etc
             /opt            /boot
    variable /var/mail       /var/run
             /var/spool/news /var/lock
 
+            可分享            不可分享的
+   静态的    /usr             /etc
+            /opt             /boot
+   动态的    /var/mail        /var/run
+            /var/spool/news  /var/lock
+
 Chapter 3. The Root Filesystem
+第三章. 根文件系统
 
    Table of Contents
+   目录
 
    3.1. Purpose
+   3.1. 目的
    3.2. Requirements
+   3.2. 要求
    3.3. Specific Options
+   3.3. 特殊选项
    3.4. /bin : Essential user command binaries (for use by all
           users)
+   3.4. /bin : 用户的必要二进制命令（所有用户可用）
 
         3.4.1. Purpose
+        3.4.1. 目的
         3.4.2. Requirements
+        3.4.2. 要求
         3.4.3. Specific Options
+        3.4.3. 特殊选项
 
    3.5. /boot : Static files of the boot loader
+   3.5. /boot : 启动加载器需要的静态文件
 
         3.5.1. Purpose
+        3.5.1. 目的
         3.5.2. Specific Options
+        3.5.2. 特殊选项
 
    3.6. /dev : Device files
+   3.6. /dev : 设备文件
 
         3.6.1. Purpose
+        3.6.1. 目的
         3.6.2. Specific Options
+        3.6.2. 特殊选项
 
    3.7. /etc : Host-specific system configuration
+   3.7. /etc : 系统配置文件
 
         3.7.1. Purpose
+        3.7.1. 目的
         3.7.2. Requirements
+        3.7.2. 要求
         3.7.3. Specific Options
+        3.7.3. 特殊选项
         3.7.4. /etc/opt : Configuration files for /opt
+        3.7.4. /etc/opt : /opt的配置文件
         3.7.5. /etc/X11 : Configuration for the X Window System
                 (optional)
+        3.7.5. /etc/X11 : X图形系统的配置文件
 
         3.7.6. /etc/sgml : Configuration files for SGML (optional)
+        3.7.6. /etc/sgml : SGML的配置文件
         3.7.7. /etc/xml : Configuration files for XML (optional)
+        3.7.7. /etc/xml : XML的配置文件
 
    3.8. /home : User home directories (optional)
+   3.8. /home : 用户的“家”目录
 
         3.8.1. Purpose
+        3.8.1. 目的
         3.8.2. Requirements
+        3.8.2. 要求
         3.8.3. Home Directory Specifications and Conventions
+        3.8.3. “家”目录文件夹的特定要求和约定惯例
 
    3.9. /lib : Essential shared libraries and kernel modules
+   3.9. /lib : 必要的共享库文件和内核模块
 
         3.9.1. Purpose
+        3.9.1. 目的
         3.9.2. Requirements
+        3.9.2. 要求
         3.9.3. Specific Options
+        3.9.3. 特定选项
 
    3.10. /lib<qual> : Alternate format essential shared libraries
           (optional)
+   3.10. /lib<qual> : 必要库文件的可选格式
 
         3.10.1. Purpose
+        3.10.1. 目的
         3.10.2. Requirements
+        3.10.2. 要求
 
    3.11. /media : Mount point for removable media
+   3.11. /media : 挂载可移动的介质
 
         3.11.1. Purpose
+        3.11.1. 目的
         3.11.2. Specific Options
+        3.11.2. 特定选项
 
    3.12. /mnt : Mount point for a temporarily mounted filesystem
+   3.12. /mnt : 临时挂载文件系统
 
         3.12.1. Purpose
+        3.12.1. 目的
 
    3.13. /opt : Add-on application software packages
+   3.13. /opt : 附加应用软件包
 
         3.13.1. Purpose
+        3.13.1. 目的
         3.13.2. Requirements
+        3.13.2. 要求
 
    3.14. /root : Home directory for the root user (optional)
+   3.14. /root : root用户的“家”目录
 
         3.14.1. Purpose
+        3.14.1. 目的
 
    3.15. /run : Run-time variable data
+   3.15. /run : 运行时间可变数据
 
         3.15.1. Purpose
+        3.15.1. 目的
         3.15.2. Requirements
+        3.15.2. 要求
 
    3.16. /sbin : System binaries
+   3.16. /sbin : 系统二进制文件
 
         3.16.1. Purpose
+        3.16.1. 目的
         3.16.2. Requirements
+        3.16.2. 要求
         3.16.3. Specific Options
+        3.16.3. 特定要求
 
    3.17. /srv : Data for services provided by this system
+   3.17. /srv : 本系统提供服务所需的数据
 
         3.17.1. Purpose
+        3.17.1. 目的
 
    3.18. /tmp : Temporary files
+   3.18. /tmp : 临时文件
 
         3.18.1. Purpose
+        3.18.1. 目的
 
 3.1. Purpose
+3.1. 目的
 
    The contents of the root filesystem must be adequate to boot,
    restore, recover, and/or repair the system.
+   根目录文件系统必须能够满足启动，保存，恢复和修复系统。
      * To boot a system, enough software and data must be present
        on the root partition to mount other filesystems. This
        includes utilities, configuration, boot loader information,
        and other essential start-up data. /usr, /opt, and /var are
        designed such that they may be located on other partitions
        or filesystems.
+     * 为了启动一个系统，足够的软件和系统必须在根分区上存在。这包含常用工具，配置文件，启动加载器信息和其他必要的开启数据。/usr, /opt和/var是设计用来满足上面的需求的，他们可以保存在其他单独的分区。
      * To enable recovery and/or repair of a system, those
        utilities needed by an experienced maintainer to diagnose
        and reconstruct a damaged system must be present on the
        root filesystem.
+     * 为了能够具有恢复和修复系统的能力，那些一个有经验的维护者用来辨别一个受到损害的系统的常用工具必须保存在根目录上
      * To restore a system, those utilities needed to restore from
        system backups (on floppy, tape, etc.) must be present on
        the root filesystem.
+     * 为了恢复一个系统，那些用来恢复系统备份的文件必须保存在根目录上。
 
 Rationale
 
