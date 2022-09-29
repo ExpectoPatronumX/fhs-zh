@@ -749,109 +749,179 @@ Rationale
    subdirectories in the root directory. Other locations in the
    FHS hierarchy provide more than enough flexibility for any
    package.
+   应用永远不应该创造或者需要在根目录下的特殊文件或者子文件夹。在FHS标准提供的其他位置下为各个软件包提供了无穷的灵活性。
 
 Rationale
+理由
 
    There are several reasons why creating a new subdirectory of
    the root filesystem is prohibited:
+   这些原因解释了为什么在根目录下创建新的子文件夹是禁止的：
      * It demands space on a root partition which the system
        administrator may want kept small and simple for either
        performance or security reasons.
+     * 他需要根分区的硬盘空间，但是系统管理员通常会想要保持根分区的简单和轻量，这样可以保证安全性和较好的性能。
      * It evades whatever discipline the system administrator may
        have set up for distributing standard file hierarchies
        across mountable volumes.
+     * 它侵犯了系统管理员为文件设定的标准文件分层规则。
 
    Distributions should not create new directories in the root
    hierarchy without extremely careful consideration of the
    consequences including for application portability.
+   发行版不应该在根分区上创建新的子文件夹，除非有极度充分的考虑了对软件可用性的影响。
 
 3.2. Requirements
+3.2. 要求
 
    The following directories, or symbolic links to directories,
    are required in /.
+   下面这些目录或者软连接是在根目录/中要求存在的
    Directory Description
+   目录       描述
    bin       Essential command binaries
+   bin       必要的命令行二进制文件
    boot      Static files of the boot loader
+   boot      启动加载器需要的静态文件
    dev       Device files
+   dev       设备文件
    etc       Host-specific system configuration
+   etc       系统配置文件
    lib       Essential shared libraries and kernel modules
+   lib       必要的共享的库文件和内核模块
    media     Mount point for removable media
+   media     可移动媒介的挂载点
    mnt       Mount point for mounting a filesystem temporarily
+   mnt       临时挂载文件系统的挂载点
    opt       Add-on application software packages
+   opt       额外的应用程序软件包
    run       Data relevant to running processes
+   run       与运行进行有关的数据
    sbin      Essential system binaries
+   sbin      必要的系统二进制文件
    srv       Data for services provided by this system
+   srv       系统提供服务的比亚数据
    tmp       Temporary files
+   tmp       临时文件
    usr       Secondary hierarchy
+   usr       第二等级的分级，也就意味着根目录有的usr也应该有
    var       Variable data
+   var       动态数据
 
    Each directory listed above is specified in detail in separate
    subsections below. /usr and /var each has a complete section in
    this document due to the complexity of those directories.
+   上面列举的每一个文件夹都在特定的部分上。/usr和/var各自有上述完整的文件。
 
 3.3. Specific Options
+3.3. 特定选项
 
    The following directories, or symbolic links to directories,
    must be in /, if the corresponding subsystem is installed:
+   下面的路径或者指向路径的软连接必须在根目录/中，如果要求的子系统安装了的话
    Directory Description
+   目录       描述
    home User home directories (optional)
+   home 用户的“家”目录
    lib<qual> Alternate format essential shared libraries
    (optional)
+   lib<qual> 可选的呢必要共享库文件的格式
    root Home directory for the root user (optional)
+   root 管理员用户root的“家”目录
 
    Each directory listed above is specified in detail in separate
    subsections below.
+   上面说的每一个文件夹在下面都会详细解释。
 
 3.4. /bin : Essential user command binaries (for use by all users)
+3.4. /bin : 用户命令必要的二进制文件（所有用户可用）
 
 3.4.1. Purpose
+3.4.1. 目的
 
    /bin contains commands that may be used by both the system
    administrator and by users, but which are required when no
    other filesystems are mounted (e.g. in single user mode). It
    may also contain commands which are used indirectly by scripts.
    ^[1]
+   /bin 包含可能别系统管理员和用户使用到的命令，但是当其他文件系统没有挂载的时候这是必须的（例如在单用户模式下）。它应该包含被脚本间接使用到的命令。
 
 3.4.2. Requirements
+3.4.2. 要求
 
    There must be no subdirectories in /bin.
-
+   /bin目录下必须没有子文件夹
    The following commands, or symbolic links to commands, are
    required in /bin:
+   下面的命令或者符号链接在/bin中是必要的:
    Command  Description
+   命令      描述
    cat      Utility to concatenate files to standard output
+   cat      用来将文件输出到标准输出的工具
    chgrp    Utility to change file group ownership
+   chgrp    更改文件所属用户组的工具
    chmod    Utility to change file access permissions
+   chmod    更改文件允许的权限的工具
    chown    Utility to change file owner and group
+   chown    更改文件所属用户和用户组的工具
    cp       Utility to copy files and directories
+   cp       复制文件和文件夹的工具
    date     Utility to print or set the system data and time
+   date     用来输出或者设置系统日期和时间的工具
    dd       Utility to convert and copy a file
+   dd       用来转换和复制文件的工具
    df       Utility to report filesystem disk space usage
+   df       报告文件系统磁盘使用情况的工具
    dmesg    Utility to print or control the kernel message buffer
+   dmesg    输出或者控制内核信息缓存的工具
    echo     Utility to display a line of text
+   echo     用来显示一行文本的工具
    false    Utility to do nothing, unsuccessfully
+   false    啥也不干的工具
    hostname Utility to show or set the system's host name
+   hostname 用来显示或者设置系统的host名称的工具
    kill     Utility to send signals to processes
+   kill     用来向进程发送信号的工具
    ln       Utility to make links between files
+   ln       在文件之间创造链接的工具
    login    Utility to begin a session on the system
+   login    用来在系统上开始一个线程的工具
    ls       Utility to list directory contents
+   ls       显示当前文件夹内容的工具
    mkdir    Utility to make directories
+   mkdir    创造文件夹的工具
    mknod    Utility to make block or character special files
+   mknod    创造块或者字符特殊文件的工具
    more     Utility to page through text
+   more     文本分页器工具
    mount    Utility to mount a filesystem
+   mount    挂载文件系统的工具
    mv       Utility to move/rename files
+   mv       移动或者转移文件的工具
    ps       Utility to report process status
+   ps       报告进程情况的工具
    pwd      Utility to print name of current working directory
+   pwd      打印当前工作目录的工具
    rm       Utility to remove files or directories
+   rm       删除文件和文件夹的工具
    rmdir    Utility to remove empty directories
+   rmdir    删除空文件夹的工具
    sed      The `sed' stream editor
+   sed      sed流文本编辑器
    sh       POSIX compatible command shell
+   sh       兼容POSIX的命令行shell
    stty     Utility to change and print terminal line settings
+   sttyp    用来改变和打印命令行设置的工具
    su       Utility to change user ID
+   su       更改用户ID的工具
    sync     Utility to flush filesystem buffers
+   sync     清除用户缓冲的工具
    true     Utility to do nothing, successfully
+   true     啥也不干的工具
    umount   Utility to unmount file systems
+   umount   卸载文件系统的工具
    uname    Utility to print system information
+   uname    打印系统信息的工具
 
    If /bin/sh is not the POSIX compatible shell command itself, it
    must be a hard or symbolic link to the real shell command.
