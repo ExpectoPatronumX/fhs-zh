@@ -433,7 +433,8 @@ Chapter 1. Introduction
      * FHS addresses issues where file placements need to be
        coordinated between multiple parties such as local sites,
        distributions, applications, documentation, etc.
-     * FHS强调了在多用户环境下需要注意的问题，比如本地网站，发行版，应用，文档等。
+     * FHS强调了在多用户环境下需要注意的问题，
+       比如本地网站，发行版，应用，文档等。
 
 1.2. Conventions
 1.2. 约定惯例
@@ -442,13 +443,16 @@ Chapter 1. Introduction
    rather than the plain text version. In the typeset version, the
    names of files and directories are displayed in a
    constant-width font.
-   我们推荐拟阅读本文档的具有格式的版本，而不是一个纯文本文件（虽然为了方便翻译，我就是采用的纯文本文件）。在有格式的版本当中，文件名和路径是使用等宽字体显示的。
+   我们推荐拟阅读本文档的具有格式的版本，而不是一个纯文本文件（虽然为了方便翻译，
+   我就是采用的纯文本文件）。在有格式的版本当中，文件名和路径是使用等宽字体显示
+   的。
 
    Components of filenames that vary are represented by a
    description of the contents enclosed in "<" and ">" characters,
    <thus>. Electronic mail addresses are also enclosed in "<" and
    ">" but are shown in the usual typeface.
-   文件名的不同组合是由被“<”和“>”包裹起来的描述内容代表的，<thus>。电子邮箱地址也是用“<”和“>”包裹起来的，但是使用有用的字体展现。
+   文件名的不同组合是由被“<”和“>”包裹起来的描述内容代表的，<thus>。电子邮箱地址
+   也是用“<”和“>”包裹起来的，但是使用有用的字体展现。
 
 
    Optional components of filenames are enclosed in "[" and "]"
@@ -456,7 +460,9 @@ Chapter 1. Introduction
    For example, if a filename is allowed to occur either with or
    without an extension, it might be represented by
    <filename>[.<extension>].
-   文件名的可选部分是由“[”和“]”包裹起来的字符，并且可能组合使用“<”和“>”。例如，如果一个文件名是允许包含或者不包含扩展名的，它可能是由下面这种方式表示的：<filename>[.<extension>]。
+   文件名的可选部分是由“[”和“]”包裹起来的字符，并且可能组合使用“<”和“>”。例如，
+   如果一个文件名是允许包含或者不包含扩展名的，它可能是由下面这种方式表示的：
+   <filename>[.<extension>]。
 
    Variable substrings of directory names and filenames are
    indicated by "*".
@@ -480,18 +486,23 @@ Chapter 2. The Filesystem
    be located in different directories. This makes it easy to
    store files with different usage characteristics on different
    filesystems.
-   在各种文件中定义两个独立的差异是可能的：可分享的与不可分享的，动态的和静态的。总的来说，文件在这些方面有不同的应该放置在不同的分类当中。这就使得在不同的文件系统上保存不同用途的字符是十分方便的。
+   在各种文件中定义两个独立的差异是可能的：可分享的与不可分享的，动态的和静态的。
+   总的来说，文件在这些方面有不同的应该放置在不同的分类当中。这就使得在不同的文件
+   系统上保存不同用途的字符是十分方便的。
 
    "Shareable" files are those that can be stored on one host and
    used on others. "Unshareable" files are those that are not
    shareable. For example, the files in user home directories are
    shareable whereas device lock files are not.
-   “可分享”的文件就是哪些能被存储在host上并且其他人也可以使用的文件。“不可分享的”文件就是哪些不能够分享的文件。例如，在用户“家”目录下的可分享文件而文件锁文件是不能的。
+   “可分享”的文件就是哪些能被存储在host上并且其他人也可以使用的文件。“不可分享
+   的”文件就是哪些不能够分享的文件。例如，在用户“家”目录下的可分享文件而文件锁文
+   件是不能的。
 
    "Static" files include binaries, libraries, documentation files
    and other files that do not change without system administrator
    intervention. "Variable" files are files that are not static.
-   “静态”文件包含二进制文件，库文件，文档文件以及其他的只有系统管理员有权利改变的文件。“动态”文件是哪些不是静态的文件。
+   “静态”文件包含二进制文件，库文件，文档文件以及其他的只有系统管理员有权利改变的
+   文件。“动态”文件是哪些不是静态的文件。
 
 Rationale
 原理
@@ -503,13 +514,17 @@ Rationale
    all the files a system requires that are stored on a foreign
    host can be made available by mounting one or a few directories
    from the foreign host.
-   可分享文件可以存储在一个HOST上并且被其他的用户使用。典型来说，尽管并不是所有的文件分层系统上的文件都是可分享的，并且每一个系统都有包含至少他自己的本地文件。如果一个系统所必须的所有文件都是存储在另一个host长，就使得挂载远程host的文件是可行的。
+   可分享文件可以存储在一个HOST上并且被其他的用户使用。典型来说，尽管并不是所有
+   的文件分层系统上的文件都是可分享的，并且每一个系统都有包含至少他自己的本地文
+   件。如果一个系统所必须的所有文件都是存储在另一个host长，就使得挂载远程host的
+   文件是可行的。
 
    Static and variable files should be segregated because static
    files, unlike variable files, can be stored on read-only media
    and do not need to be backed up on the same schedule as
    variable files.
-   静态文件应该是分割开的因为静态文件和动态文件有较大不同，静态文件可以被存储到只读的媒介当中，并且不需要像动态文件一样需要定期备份。
+   静态文件应该是分割开的因为静态文件和动态文件有较大不同，静态文件可以被存储到只
+   读的媒介当中，并且不需要像动态文件一样需要定期备份。
 
    Historical UNIX-like filesystem hierarchies contained both
    static and variable files under both /usr and /etc. In order to
@@ -519,7 +534,10 @@ Rationale
    a separate filesystem). Variable files have been transferred
    from /etc to /var over a longer period as technology has
    permitted.
-   历史上类UNIX的文件系统在/usr和/etc都保存动态和静态文件。为了指出我们刚才提到的分开存储的优越性，/var的分层文件系统被创造了，并且所有的动态文件都从/usr下改变到了/var文件下。所以现在/usr可以被挂载为只读的（前提是单独分区了）。动态文件也从/etc转移到了/var在科技允许的的很长一段时间内。
+   历史上类UNIX的文件系统在/usr和/etc都保存动态和静态文件。为了指出我们刚才提到
+   的分开存储的优越性，/var的分层文件系统被创造了，并且所有的动态文件都从/usr下
+   改变到了/var文件下。所以现在/usr可以被挂载为只读的（前提是单独分区了）。动态
+   文件也从/etc转移到了/var在科技允许的的很长一段时间内。
 
    Here is an example of a FHS-compliant system. (Other
    FHS-compliant layouts are possible.)
@@ -694,12 +712,15 @@ Chapter 3. The Root Filesystem
        and other essential start-up data. /usr, /opt, and /var are
        designed such that they may be located on other partitions
        or filesystems.
-     * 为了启动一个系统，足够的软件和系统必须在根分区上存在。这包含常用工具，配置文件，启动加载器信息和其他必要的开启数据。/usr, /opt和/var是设计用来满足上面的需求的，他们可以保存在其他单独的分区。
+     * 为了启动一个系统，足够的软件和系统必须在根分区上存在。这包含常用工具，配
+       置文件，启动加载器信息和其他必要的开启数据。/usr, /opt和/var是设计用来
+       满足上面的需求的，他们可以保存在其他单独的分区。
      * To enable recovery and/or repair of a system, those
        utilities needed by an experienced maintainer to diagnose
        and reconstruct a damaged system must be present on the
        root filesystem.
-     * 为了能够具有恢复和修复系统的能力，那些一个有经验的维护者用来辨别一个受到损害的系统的常用工具必须保存在根目录上
+     * 为了能够具有恢复和修复系统的能力，那些一个有经验的维护者用来辨别一个受到
+       损害的系统的常用工具必须保存在根目录上
      * To restore a system, those utilities needed to restore from
        system backups (on floppy, tape, etc.) must be present on
        the root filesystem.
@@ -713,7 +734,8 @@ Rationale
    may not want the extra complexity of a partitioned system, the
    option to keep the root small should be preserved for several
    reasons:
-   根文件系统的最低要求应为尽可能小，而不仅仅是比较小。虽然有许多用户可能不希望分区系统的额外复杂性，保持根文件系统较小的选项有以下几个原因
+   根文件系统的最低要求应为尽可能小，而不仅仅是比较小。虽然有许多用户可能不希望分
+   区系统的额外复杂性，保持根文件系统较小的选项有以下几个原因
      * It is occasionally mounted from very small media.
      * 他有时会挂载于很小的介质
      * The root filesystem contains many system-specific
@@ -724,7 +746,10 @@ Rationale
        networked systems minimizes the amount of lost space for
        areas of unshareable files. It also allows workstations
        with smaller local hard drives.
-     * 根文件系统包含许多系统的配置文件。可能的例子比如系统内核、特定主机名等。这意味着根文件系统并不总是在网络系统之间可以共享的。在服务器上保持较小联网系统最大限度地减少了不可共享文件空间消耗。它还允许工作站使用较小的本地硬盘。
+     * 根文件系统包含许多系统的配置文件。可能的例子比如系统内核、特定主机名等。
+       这意味着根文件系统并不总是在网络系统之间可以共享的。在服务器上保持较小联
+       网系统最大限度地减少了不可共享文件空间消耗。它还允许工作站使用较小的本地
+       硬盘。
      * While you may have the root filesystem on a large
        partition, and may be able to fill it to your heart's
        content, there will be people with smaller partitions. If
@@ -733,23 +758,29 @@ Rationale
        on smaller partitions. If you are a developer then you may
        be turning your assumption into a problem for a large
        number of users.
-     * 尽管你有可能将根文件系统挂载到了一个大的分区上，并且可能用你心爱的内容填充它，但是有很多人的根文件系统是很小的。如果你有安装了更多的文件，你可能发现在其它使用了更小的根文件系统上是不完整的。如果你是一个开发者，你应该考虑绝大多数的用户。
+     * 尽管你有可能将根文件系统挂载到了一个大的分区上，并且可能用你心爱的内容填
+       充它，但是有很多人的根文件系统是很小的。如果你有安装了更多的文件，你可能
+       发现在其它使用了更小的根文件系统上是不完整的。如果你是一个开发者，你应该
+       考虑绝大多数的用户。
      * Disk errors that corrupt data on the root filesystem are a
        greater problem than errors on any other partition. A small
        root filesystem is less prone to corruption as the result
        of a system crash.
-     * 发生在根目录是数据破坏的硬盘错误比其他分区的错误严重的多。一个小的根目录分区更不容易在系统崩溃的时候出错。
+     * 发生在根目录是数据破坏的硬盘错误比其他分区的错误严重的多。一个小的根目录
+       分区更不容易在系统崩溃的时候出错。
 
    These considerations must be balanced against the need for a
    minimally useful operating environment, for the sake of the
    boot process as well as in failure recovery situations.
-   这些考虑必须于最小可用的操作系统之间保持平衡，为了寻找启动过程和恢复模式的失败。
+   这些考虑必须于最小可用的操作系统之间保持平衡，为了寻找启动过程和恢复模式的失
+   败。
 
    Applications must never create or require special files or
    subdirectories in the root directory. Other locations in the
    FHS hierarchy provide more than enough flexibility for any
    package.
-   应用永远不应该创造或者需要在根目录下的特殊文件或者子文件夹。在FHS标准提供的其他位置下为各个软件包提供了无穷的灵活性。
+   应用永远不应该创造或者需要在根目录下的特殊文件或者子文件夹。在FHS标准提供的其
+   他位置下为各个软件包提供了无穷的灵活性。
 
 Rationale
 理由
@@ -760,7 +791,8 @@ Rationale
      * It demands space on a root partition which the system
        administrator may want kept small and simple for either
        performance or security reasons.
-     * 他需要根分区的硬盘空间，但是系统管理员通常会想要保持根分区的简单和轻量，这样可以保证安全性和较好的性能。
+     * 他需要根分区的硬盘空间，但是系统管理员通常会想要保持根分区的简单和轻量，
+       这样可以保证安全性和较好的性能。
      * It evades whatever discipline the system administrator may
        have set up for distributing standard file hierarchies
        across mountable volumes.
@@ -769,7 +801,8 @@ Rationale
    Distributions should not create new directories in the root
    hierarchy without extremely careful consideration of the
    consequences including for application portability.
-   发行版不应该在根分区上创建新的子文件夹，除非有极度充分的考虑了对软件可用性的影响。
+   发行版不应该在根分区上创建新的子文件夹，除非有极度充分的考虑了对软件可用性的影
+   响。
 
 3.2. Requirements
 3.2. 要求
@@ -844,7 +877,8 @@ Rationale
    other filesystems are mounted (e.g. in single user mode). It
    may also contain commands which are used indirectly by scripts.
    ^[1]
-   /bin 包含可能别系统管理员和用户使用到的命令，但是当其他文件系统没有挂载的时候这是必须的（例如在单用户模式下）。它应该包含被脚本间接使用到的命令。
+   /bin 包含可能别系统管理员和用户使用到的命令，但是当其他文件系统没有挂载的时候
+   这是必须的（例如在单用户模式下）。它应该包含被脚本间接使用到的命令。
 
 3.4.2. Requirements
 3.4.2. 要求
