@@ -706,13 +706,16 @@ Chapter 3. The Root Filesystem
      * 为了恢复一个系统，那些用来恢复系统备份的文件必须保存在根目录上。
 
 Rationale
+理由
 
    The minimum requirements for the root filesystem should be as
    small as reasonably possible, but no smaller. While many users
    may not want the extra complexity of a partitioned system, the
    option to keep the root small should be preserved for several
    reasons:
+   根文件系统的最低要求应为尽可能小，而不仅仅是比较小。虽然有许多用户可能不希望分区系统的额外复杂性，保持根文件系统较小的选项有以下几个原因
      * It is occasionally mounted from very small media.
+     * 他有时会挂载于很小的介质
      * The root filesystem contains many system-specific
        configuration files. Possible examples include a kernel
        that is specific to the system, a specific hostname, etc.
@@ -721,6 +724,7 @@ Rationale
        networked systems minimizes the amount of lost space for
        areas of unshareable files. It also allows workstations
        with smaller local hard drives.
+     * 根文件系统包含许多系统的配置文件。可能的例子比如系统内核、特定主机名等。这意味着根文件系统并不总是在网络系统之间可以共享的。在服务器上保持较小联网系统最大限度地减少了不可共享文件空间消耗。它还允许工作站使用较小的本地硬盘。
      * While you may have the root filesystem on a large
        partition, and may be able to fill it to your heart's
        content, there will be people with smaller partitions. If
@@ -729,14 +733,17 @@ Rationale
        on smaller partitions. If you are a developer then you may
        be turning your assumption into a problem for a large
        number of users.
+     * 尽管你有可能将根文件系统挂载到了一个大的分区上，并且可能用你心爱的内容填充它，但是有很多人的根文件系统是很小的。如果你有安装了更多的文件，你可能发现在其它使用了更小的根文件系统上是不完整的。如果你是一个开发者，你应该考虑绝大多数的用户。
      * Disk errors that corrupt data on the root filesystem are a
        greater problem than errors on any other partition. A small
        root filesystem is less prone to corruption as the result
        of a system crash.
+     * 发生在根目录是数据破坏的硬盘错误比其他分区的错误严重的多。一个小的根目录分区更不容易在系统崩溃的时候出错。
 
    These considerations must be balanced against the need for a
    minimally useful operating environment, for the sake of the
    boot process as well as in failure recovery situations.
+   这些考虑必须于最小可用的操作系统之间保持平衡，为了寻找启动过程和恢复模式的失败。
 
    Applications must never create or require special files or
    subdirectories in the root directory. Other locations in the
