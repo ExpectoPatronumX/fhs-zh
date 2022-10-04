@@ -1184,21 +1184,34 @@ Rationale
    mtab Dynamic information about filesystems (optional)
    mtab 关于文件系统的动态信息
    mtools.conf Configuration file for mtools (optional)
+   mtools.conf mtools的配置文件
    networks Static information about network names (optional)
+   networks 网络名称的静态信息
    passwd The password file (optional)
+   passwd 密码信息
    printcap The lpd printer capability database (optional)
+   printcap lpd打印机可用的数据库
    profile Systemwide initialization file for sh shell logins
+   profile sh shell登陆时的系统初始化文件
    (optional)
    protocols IP protocol listing (optional)
+   protocols IP代理工具列表
    resolv.conf Resolver configuration file (optional)
+   resolv.conf 配置文件回复方法
    rpc RPC protocol listing (optional)
+   rpc RPC代理工具列表
    securetty TTY access control for root login (optional)
+   securetty root用户登陆可用TTY
    services Port names for network services (optional)
+   services 网络服务的端口名字
    shells Pathnames of valid login shells (optional)
+   shells 可以登陆shell的路径名
    syslog.conf Configuration file for syslogd (optional)
+   syslog.conf syslogd的配置文件
 
    mtab does not fit the static nature of /etc: it is excepted for
    historical reasons. ^[4]
+   mtab 不符合静态文件放置在/etc的要求，这是由于一些历史原因决定的
 
 3.7.4. /etc/opt : Configuration files for /opt
 
