@@ -1214,51 +1214,73 @@ Rationale
    mtab 不符合静态文件放置在/etc的要求，这是由于一些历史原因决定的
 
 3.7.4. /etc/opt : Configuration files for /opt
+3.7.4. /etc/opt : /opt的配置文件
 
 3.7.4.1. Purpose
+3.7.4.1. 目的
 
    Host-specific configuration files for add-on application
    software packages must be installed within the directory
    /etc/opt/<subdir>, where <subdir> is the name of the subtree in
    /opt where the static data from that package is stored.
+   对于附加应用软件的系统配置文件必须安装在/etc/opt/<subdir>目录当中。
+   其中<subdir>就是在/opt当中静态数据所在的子目录的名称。
 
 3.7.4.2. Requirements
+3.7.4.2. 要求
 
    No structure is imposed on the internal arrangement of
    /etc/opt/<subdir>.
+   /etc/opt/<subdir>中的文件组织形式没有要求
 
    If a configuration file must reside in a different location in
    order for the package or system to function properly, it may be
    placed in a location other than /etc/opt/<subdir>.
+   如果为了系统或者函数的正常运行必须将配置文件放置在其他位置，
+   他应该放置在其他文职而不是/etc/opt/<subdir>当中。
 
 Rationale
+理由
 
    Refer to the rationale for /opt.
+   参考/opt的理由
 
 3.7.5. /etc/X11 : Configuration for the X Window System (optional)
+3.7.5. /etc/X11 : X窗口系统的配置文件
 
 3.7.5.1. Purpose
+3.7.5.1. 目的
 
    /etc/X11 is the location for all X11 host-specific
    configuration. This directory is necessary to allow local
    control if /usr is mounted read only.
+   /etc/X11是所以X11系统配置文件存储的位置。
+   如果/usr是由只读格式挂载的话，为了允许本地对X11的控制这个目录是必须的。
 
 3.7.5.2. Specific Options
+3.7.5.2. 具体选项
 
    The following files, or symbolic links to files, must be in
    /etc/X11 if the corresponding subsystem is installed:
+   下面的文件或者软链接必须放置在/etc/X11目录当中：
    File Description
+   文件  描述
    xorg.conf The configuration file for X.org versions 7 and later
    (optional)
+   xorg.conf X.conf的配置文件
    Xmodmap Global X11 keyboard modification file (optional)
+   Xmodmap X11的全局键盘映射文件
 
    Subdirectories of /etc/X11 may include those for xdm and for
    any other programs (some window managers, for example) that
    need them. ^[5]
+   /etc/X11的子目录应该包含一些需要子目录的程序比如xdm和其他的程序（比如一些窗口管理器）
 
 3.7.6. /etc/sgml : Configuration files for SGML (optional)
+3.7.6. /etc/sgml : SGML的配置文件
 
 3.7.6.1. Purpose
+3.7.6.1. 目的
 
    Generic configuration files defining high-level parameters of
    the SGML systems are installed here. Files with names *.conf
@@ -1266,6 +1288,7 @@ Rationale
    the DTD-specific centralized catalogs, containing references to
    all other catalogs needed to use the given DTD. The super
    catalog file catalog references all the centralized catalogs.
+   
 
 3.7.7. /etc/xml : Configuration files for XML (optional)
 
