@@ -1288,9 +1288,13 @@ Rationale
    the DTD-specific centralized catalogs, containing references to
    all other catalogs needed to use the given DTD. The super
    catalog file catalog references all the centralized catalogs.
+   SGML高等级的参数配置文件再次安装。所有的以conf结尾的文件都是总的文件。
+   以cat结尾的文件是DTD特定的中心分类，包含所有其他分类的参考。
+   
    
 
 3.7.7. /etc/xml : Configuration files for XML (optional)
+3.7.7. /etc/xml : XML的配置文件
 
 3.7.7.1. Purpose
 
@@ -1300,16 +1304,23 @@ Rationale
    catalog references all the centralized catalogs.
 
 3.8. /home : User home directories (optional)
+3.8. /home : 用户的家目录
 
 3.8.1. Purpose
+3.8.1. 目的
 
    /home is a fairly standard concept, but it is clearly a
    site-specific filesystem. ^[6] The setup will differ from host
    to host. Therefore, no program should assume any specific
    location for a home directory, rather it should query for it.
    ^[7]
+   /home是一个通常的标准概念，但是它是一个特定的文件系统。
+   不同的主机上的/home的设定可能是不同的。
+   所以，没有程序应该假定放置在/home目录中特定的文件，
+   他应该先查询有没有，再进行后续的操作。
 
 3.8.2. Requirements
+3.8.2. 要求
 
    User specific configuration files for applications are stored
    in the user's home directory in a file that starts with the '.'
@@ -1318,8 +1329,12 @@ Rationale
    subdirectory with a name starting with a '.' character, (a "dot
    directory"). In this case the configuration files should not
    start with the '.' character. ^[8]
+   用户特定的软件配置文件应该放置在用户的家目录下，并且以"."开头。
+   如果一个应用不仅仅只需要创造一个文件，那么他应该创造一个以"."开头的子目录。
+   在这种情况下就不用再以"."开头配置文件了。
 
 3.8.3. Home Directory Specifications and Conventions
+3.8.3. 家目录下的具体要求和通常约定。
 
    A number of efforts have been made in the past to standardize
    the layout of home directories, including the XDG Base
@@ -1330,49 +1345,74 @@ Rationale
    create directory hierarchies which follow the specifications
    and conventions. Those directory hierarchies may be located
    underneath home directories.
+   过去已经有了很多的努力来为家目录的分层目录系统做了标准，包含XDG基目录要求和GLib
+   对于用户目录的贯常约定。在未来还会对这些要求有着更加丰富的方向。
+   为了促进程序使用这样的文件分层标准，发行版应该创造符合标准的目录系统。
+   这些目录风曾系统呢个可以包含家目录的深层级的目录。
 
 3.9. /lib : Essential shared libraries and kernel modules
+3.9. /lib : 必要的共享库文件和内核模块。
 
 3.9.1. Purpose
+3.9.1. 目的
 
    The /lib directory contains those shared library images needed
    to boot the system and run the commands in the root filesystem,
    ie. by binaries in /bin and /sbin. ^[11]
+   /lib目录包含那些启动系统需要的共享的库文件和需要运行的/bin和/sbin中二进制文件
+   需要的命令。
 
 3.9.2. Requirements
+3.9.2. 要求
 
    At least one of each of the following filename patterns are
    required (they may be files, or symbolic links):
+   至少下面的文件模式四要求的，可以是文件也可以是软链接：
    File      Description
+   文件       描述
    libc.so.* The dynamically-linked C library (optional)
+   libc.so.* C的动态库
    ld*       The execution time linker/loader (optional)
+   ld*       执行的连接器和装载器
 
    If a C preprocessor is installed, /lib/cpp must be a reference
    to it, for historical reasons. ^[12]
+   如果一个C预处理器安装了，/lib/cpp必须引用他，这是为了和历史上的要求相符合。
 
 3.9.3. Specific Options
+3.9.3. 具体要求
 
    The following directories, or symbolic links to directories,
    must be in /lib, if the corresponding subsystem is installed:
+   下面的目录或者软链接必须在/lib当中：
    Directory Description
+   目录       描述
    modules   Loadable kernel modules (optional)
+   modules   可以装载的内核模块
 
 3.10. /lib<qual> : Alternate format essential shared libraries
 (optional)
+3.10. /lib<qual> : 可选的必要共享文件
 
 3.10.1. Purpose
+3.10.1. 目的
 
    There may be one or more variants of the /lib directory on
    systems which support more than one binary format requiring
    separate libraries. ^[13]
+   支持不同格式二进制文件的系统可能需要不同的/lib目录
 
 3.10.2. Requirements
+3.10.2. 要求
 
    If one or more of these directories exist, the requirements for
    their contents are the same as the normal /lib directory,
    except that /lib<qual>/cpp is not required. ^[14]
+   如果这样的一个或者多个目录存在了，泽这些内容的要求是和/lib目录的要求相同的。
+   除了/lib<qual>/cpp这个目录不是必须的。
 
 3.11. /media : Mount point for removable media
+3.11. /media ：可卸载媒介的挂载点
 
 3.11.1. Purpose
 
