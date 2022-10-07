@@ -1580,6 +1580,8 @@ Rationale
    distribution-installed and locally-installed software,
    especially in the case of fixed pathnames found in some binary
    software.
+   在系统当中对于/opt使用最小的限制是必要的，因为在发行版安装的软件和
+   本地用户安装的软件之间可能会发生冲突，尤其是在一些固定路径名的二进制软件。
 
    The structure of the directories below /opt/<provider> is left
    up to the packager of the software, though it is recommended
@@ -1588,23 +1590,34 @@ Rationale
    /opt/<package>. A valid reason for diverging from this
    structure is for support packages which may have files
    installed in /opt/<provider>/lib or /opt/<provider>/bin.
+   在/opt/<provider>目录下的目录的结构是由软件决定的，
+   尽管推荐软件包应该安装在/opt/<provier>/<package>当中并且遵循
+   /opt/<package>下推荐结构。一个原因是因为要安装的软件可能会安装/opt/<provider>/lib，
+   或者/opt/<provider>/bin。
 
 3.14. /root : Home directory for the root user (optional)
+3.14. /root : root用户的家目录
 
 3.14.1. Purpose
+3.14.1. 目的
 
    The root account's home directory may be determined by
    developer or local preference, but this is the recommended
    default location. ^[16]
+   root用户的家目录可能有开发者或者本地偏好确定，但是仍然推荐使用这样一个默认的位置。
 
 3.15. /run : Run-time variable data
+3.15. /run : 运行时的可变数据
 
 3.15.1. Purpose
+3.15.1. 目的
 
    This directory contains system information data describing the
    system since it was booted. Files under this directory must be
    cleared (removed or truncated as appropriate) at the beginning
    of the boot process.
+   这个目录包含描述从系统启动开始的所有系统信息数据。在这个目录下的数据再启动的时候
+   必须被清理（删除或者合理的移动到其他地方。）
 
    The purposes of this directory were once served by /var/run. In
    general, programs may continue to use /var/run to fulfill the
