@@ -1415,12 +1415,15 @@ Rationale
 3.11. /media ：可卸载媒介的挂载点
 
 3.11.1. Purpose
+3.11.1. 目的
 
    This directory contains subdirectories which are used as mount
    points for removable media such as floppy disks, cdroms and zip
    disks.
+   这个目录包含一些可卸载媒介的子目录，比如碟片，软盘和磁碟
 
 Rationale
+原因
 
    Historically there have been a number of other different places
    used to mount removable media such as /cdrom, /mnt or
@@ -1430,52 +1433,81 @@ Rationale
    subdirectories in /mnt as a mount point has recently been
    common, it conflicts with a much older tradition of using /mnt
    directly as a temporary mount point.
+   由于历史原因有很多其他的地方来挂载可移动的媒介，像/cdrom,/mnt或者/mnt/cdrom。
+   将所有的可移动媒介放置在根目录下会有可能使得根目录下有过多的文件夹。
+   尽管现在在/mnt下建立子目录是比较常使用的，它和另一个历史惯例：直接在/mnt下挂载一个
+   临时的挂载点相互冲突。
 
 3.11.2. Specific Options
+3.11.2. 具体选项
 
    The following directories, or symbolic links to directories,
    must be in /media, if the corresponding subsystem is installed:
+   下面的目录或者软链接应该放置在/media下：
    Directory  Description
+   目录        描述
    floppy     Floppy drive (optional)
+   floppy     软盘
    cdrom      CD-ROM drive (optional)
+   cdrom      碟片
    cdrecorder CD writer (optional)
+   cdrecorder CD刻录机
    zip        Zip drive (optional)
+   zip        磁碟机
 
    On systems where more than one device exists for mounting a
    certain type of media, mount directories can be created by
    appending a digit to the name of those available above starting
    with '0', but the unqualified name must also exist. ^[15]
+   在需要挂载多于一个同一类型的媒介的时候，挂载的子目录可以在目录名后面加一个数字0,
+   但是无数字的目录也必须要存在。
 
 3.12. /mnt : Mount point for a temporarily mounted filesystem
+3.12. /mnt : 临时挂载文件系统的临时挂载点
 
 3.12.1. Purpose
+3.12.1. 目的
 
    This directory is provided so that the system administrator may
    temporarily mount a filesystem as needed. The content of this
    directory is a local issue and should not affect the manner in
    which any program is run.
+   这个目录是为了向系统管理员提供需要的临时文件系统的挂载点。
+   这个目录是一个本地问题，不应该影响其他程序的运行。
 
    This directory must not be used by installation programs: a
    suitable temporary directory not in use by the system must be
    used instead.
+   这个目录不应该用来安装程序，必须使用另一个不是临时挂载点的目录来安装。
 
 3.13. /opt : Add-on application software packages
+3.13. /opt : 附加的软件包应用
 
 3.13.1. Purpose
+3.13.1. 目的
 
    /opt is reserved for the installation of add-on application
    software packages.
+   /opt是为额外的软件包程序安装保留的。
 
    A package to be installed in /opt must locate its static files
    in a separate /opt/<package> or /opt/<provider> directory tree,
    where <package> is a name that describes the software package
    and <provider> is the provider's LANANA registered name.
+   一个安装到/opt的软件包必须放置在叫做/opt/<packag>或者/opt/<provider>的
+   他自己的静态文件当中，其中<package>是描述软件包名的，而<provider>是软件
+   提供者的注册名。
+   
 
 3.13.2. Requirements
+3.13.2. 要求
 
    Directory  Description
+   目录        描述
    <package>  Static package objects
+   <package>  静态包的对象
    <provider> LANANA registered provider name
+   <provider> LANANA注册的提供名
 
    The directories /opt/bin, /opt/doc, /opt/include, /opt/info,
    /opt/lib, and /opt/man are reserved for local system
@@ -1483,6 +1515,9 @@ Rationale
    intended to be placed in (by linking or copying) these reserved
    directories by the local system administrator, but must
    function normally in the absence of these reserved directories.
+   目录/opt/bin,/opt/doc,/opt/include,/opt/info,/opt/lib和/opt/man
+   是留作本地系统管理员使用的。软件包可能提供“前端”文件来放置在这些为本地管理员
+   留存的目录中，但是必须通常在功能上不使用这些保留的目录。
 
    Programs to be invoked by users must be located in the
    directory /opt/<package>/bin or under the /opt/<provider>
@@ -1490,38 +1525,55 @@ Rationale
    be located in /opt/<package>/share/man or under the
    /opt/<provider> hierarchy, and the same substructure as
    /usr/share/man must be used.
+   被用户能够调用的程序必须放置在/opt/<package>/bin或者在/opt/<provider>
+   的分层目录当中。如果软件包包含UNIX的man手册页，他们必须放置在/opt/<package>/share/man
+   或者/opt/<provider>目录下，并且这些相同的结构应该和/usr/share/man的相同。
 
    Package files that are variable (change in normal operation)
    must be installed in /var/opt. See the section on /var/opt for
    more information.
+   变化的软件包文件应该安装在/var/opt当中。更多信息可以查看/var/opt目录的描述。
 
    Host-specific configuration files must be installed in
    /etc/opt. See the section on /etc for more information.
+   系统配置文件必须安装在/etc/opt当中，更多信息查看/etc的描述。
 
    No other package files may exist outside the /opt, /var/opt,
    and /etc/opt hierarchies except for those package files that
    must reside in specific locations within the filesystem tree in
    order to function properly. For example, device lock files must
    be placed in /var/lock and devices must be located in /dev.
+   可能不会有其他的软件包文件出现在/opt,/var/opt和/etc/opt分层文件系统之外，
+   除非那些文件为了保证能够使用必须放置在文件系统中的其他特定位置。例如，设备锁
+   文件必须放置在/var/lock，设备文件必须放置在/dev。
 
    Distributions may install and otherwise manage software in /opt
    under an appropriately registered subdirectory.
+   发行版应该在/opy目录下的适当子目录中安装和管理软件
 
 Rationale
+原因
 
    The use of /opt for add-on software is a well-established
    practice in the UNIX community. The System V Application Binary
    Interface [AT&T 1990], based on the System V Interface
    Definition (Third Edition), provides for an /opt structure very
    similar to the one defined here.
+   使用/opt来安装附加的软件在UNIX社区当中就已经很好的建立并应用起来了。
+   System V Application Binary Interface，基于System V Interface 
+   Definition提供了一个和这里定义的/opt结构相似的/opt结构。
 
    The Intel Binary Compatibility Standard v. 2 (iBCS2) also
    provides a similar structure for /opt.
+   Intel Binary Compatibility Standard v. 2也为/opt提供了一个类似的结构。
 
    Generally, all data required to support a package on a system
    must be present within /opt/<package>, including files intended
    to be copied into /etc/opt/<package> and /var/opt/<package> as
    well as reserved directories in /opt.
+   总的来说，所有在系统当中支持软件包正常运行的文件必须放置在/opt/<package>内，
+   包含的配置文件应该放置在/etc/opt/<package>和/var/opt/<package>中作为/opt
+   当中的保留目录。
 
    The minor restrictions on distributions using /opt are
    necessary because conflicts are possible between
