@@ -1625,39 +1625,58 @@ Rationale
    compatibility. Programs which have migrated to use /run should
    cease their usage of /var/run, except as noted in the section
    on /var/run.
+   这个目录的用途曾经是由/var/run来执行的。
+   总的来说，程序可能继续使用/var/run来执行/run的功能来向前兼容。
+   使用了/run的程序应该停止使用/var/run，除非像在/var/run部分提到的那样。
 
    Programs may have a subdirectory of /run; this is encouraged
    for programs that use more than one run-time file. Users may
    also have a subdirectory of /run, although care must be taken
    to appropriately limit access rights to prevent unauthorized
    use of /run itself and other subdirectories. ^[17]
+   程序可能由一个子目录叫做/run；这是鼓励程序使用多于一个正在运行的文件。
+   用户可能也会有一个子目录叫做/run，尽管应该使用合理的限制来限制非认证用户使用/run和/run的子目录。
 
 3.15.2. Requirements
+3.15.2. 要求
 
    Process identifier (PID) files, which were originally placed in
    /etc, must be placed in /run. The naming convention for PID
    files is <program-name>.pid. For example, the crond PID file is
    named /run/crond.pid.
+   PID文件本来应该放置在/etc当中，但必须放置在/run当中。
+   PID文件的命名惯例是命名一个叫做<program-name>.pid的文件。
+   例如，crond的PID文件名就是/run/crond.pid。
 
    The internal format of PID files remains unchanged. The file
    must consist of the process identifier in ASCII-encoded
    decimal, followed by a newline character. For example, if crond
    was process number 25, /run/crond.pid would contain three
    characters: two, five, and newline.
+   PID文件内部的格式仍然保持不变。
+   文件必须保持以十进制ASCII码的格式保存进程的ID号，并跟着一个新的行。
+   例如，如果crond的进程号是25，那么/run/crond.pid文件应该包含3个符号：
+   2, 5和新行。
 
    Programs that read PID files should be somewhat flexible in
    what they accept; i.e., they should ignore extra whitespace,
    leading zeroes, absence of the trailing newline, or additional
    lines in the PID file. Programs that create PID files should
    use the simple specification located in the above paragraph.
+   读取PID文件的程序应该对于他们读取到的内容比较灵活；他们应该忽视额外的空白，
+   开头的零和多余的新行符号或者PID文件中多余的行。
+   创造PID文件的程序应该使用上述的简单的特定位置。
 
    System programs that maintain transient UNIX-domain sockets
    must place them in this directory or an appropriate
    subdirectory as outlined above.
+   保持着UNIX-domain的系统程序接口必须放置在本目录或者上述提到的子目录当中。
 
 3.16. /sbin : System binaries
+3.16. /sbin : 系统二进制文件
 
 3.16.1. Purpose
+3.16.1. 目的
 
    Utilities used for system administration (and other root-only
    commands) are stored in /sbin, /usr/sbin, and /usr/local/sbin.
@@ -1667,50 +1686,82 @@ Rationale
    to be mounted (when there are no problems) are generally placed
    into /usr/sbin. Locally-installed system administration
    programs should be placed into /usr/local/sbin. ^[19]
+   系统管理员和其他root用户使用的工具应该放置在/sbin，/usr/sbin和/usr/local/sbin当中。
+   /sbin中包含启动，存储，回复和修复系统所需要的必须工具来作为/bin当中程序的补充。
+   在/usr之后挂载执行的程序总体上应该放置在/usr/sbin当中。
+   本地安装的系统管理员使用的程序应该放置在/usr/local/sbin中。
 
 3.16.2. Requirements
+3.16.2. 要求
 
    There must be no subdirectories in /sbin.
+   /sbin下必须不能有子目录。
 
    The following commands, or symbolic links to commands, are
    required in /sbin:
+   下面的命令或者软连接应该放置在/sbin下：
    Command  Description
+   命令      描述
    shutdown Command to bring the system down.
+   shutdown 关闭系统的命令。
 
 3.16.3. Specific Options
+3.16.3. 具体选项
 
    The following files, or symbolic links to files, must be in
    /sbin if the corresponding subsystem is installed:
+   下面的文件或者软连接应该放置在/sbin下：
    Command Description
+   命令     描述
    fastboot Reboot the system without checking the disks
    (optional)
+   fastboot 在不检查磁盘的情况下重启系统
    fasthalt Stop the system without checking the disks (optional)
+   fasthalt 在不检查磁盘的情况下停止系统
    fdisk Partition table manipulator (optional)
+   fdisk 分区表控制程序
    fsck File system check and repair utility (optional)
+   fsck 文件系统检查和修复程序
    fsck.* File system check and repair utility for a specific
+   fsck.* 针对特定文件系统的检查和修复工具
    filesystem (optional)
    getty The getty program (optional)
+   getty getty程序
    halt Command to stop the system (optional)
+   halt 停止系统的命令
    ifconfig Configure a network interface (optional)
+   ifconfig 配置网络接口
    init Initial process (optional)
+   init 初始化进程
    mkfs Command to build a filesystem (optional)
+   mkfs 创建文件系统的命令
    mkfs.* Command to build a specific filesystem (optional)
+   mkfs.* 创建特定的文件系统
    mkswap Command to set up a swap area (optional)
+   mkswap 创建交换空间的命令
    reboot Command to reboot the system (optional)
+   reboot 重启系统的命令
    route IP routing table utility (optional)
+   route IP路由表工具
    swapon Enable paging and swapping (optional)
+   swapon 开启分页和交换空间
    swapoff Disable paging and swapping (optional)
+   swapoff 关闭分页和交换空间
    update Daemon to periodically flush filesystem buffers
    (optional)
+   update 定期刷新文件系统缓冲区的守护程序
 
 3.17. /srv : Data for services provided by this system
+3.17. /srv : 本系统提供的服务的数据
 
 3.17.1. Purpose
-
+3.17.1. 目的
    /srv contains site-specific data which is served by this
    system.
+   /srv 包含本系统提供服务的网站的特定数据
 
 Rationale
+原因
 
    This main purpose of specifying this is so that users may find
    the location of the data files for a particular service, and so
@@ -1720,6 +1771,11 @@ Rationale
    user should go in that users' home directory. If the directory
    and file structure of the data is not exposed to consumers, it
    should go in /var/lib.
+   指定这个的主要目的是为了让用户可以找到数据文件的位置，
+   以便那些需要一的树形文件结构的只读数据的服务。
+   可写数据和脚本（如 cgi 脚本）可以被合理地放置。
+   只对某一特定用户感兴趣的数据应该放在该用户的家目录下。
+   如果数据的目录和文件结构没有暴露给用户，它应该放在/var/lib中。
 
    The methodology used to name subdirectories of /srv is
    unspecified as there is currently no consensus on how this
@@ -1732,33 +1788,55 @@ Rationale
    necessarily being stored in /srv. However /srv should always
    exist on FHS compliant systems and should be used as the
    default location for such data.
+   用于命名/srv子目录的方法没有明确规定，
+   因为目前还没有关于如何命名的共识。
+   在/srv下结构化数据的一种方法是按协议，例如：ftp、rsync、www和cvs。
+   在大型系统中，按照管理环境来构造/srv可能是有用的，
+   例如/srv/physics/www，/srv/compsci/cvs，等等。
+   这种设置在不同的主机上是不同的。
+   因此，任何程序都不应该依赖/srv的特定子目录结构或数据。
+   然而，在符合FHS标准的系统中，/srv应该总是存在的，
+   并且应该被用作这些数据的默认位置。
+
 
    Distributions must take care not to remove locally placed files
    in these directories without administrator permission. ^[20]
+   发行版必须保证在不被系统管理员允许的情况下不会删除本地放置在此的文件。
 
 3.18. /tmp : Temporary files
+3.18. /tmp : 临时文件
 
 3.18.1. Purpose
+3.18.1. 目的
 
    The /tmp directory must be made available for programs that
    require temporary files.
+   /tmp目录必须被需要临时文件的程序可用。
 
    Programs must not assume that any files or directories in /tmp
    are preserved between invocations of the program.
+   程序不能够嘉定在/tmp当中文件或者目录能够在程序引用时被保存。
 
 Rationale
+原因
 
    IEEE standard POSIX.1-2008 lists requirements similar to the
    above section.
+   IEEE标准POSIX.1-2008列举了本节类似的要求。
 
    Although data stored in /tmp may be deleted in a site-specific
    manner, it is recommended that files and directories located in
    /tmp be deleted whenever the system is booted.
+   尽管在/tmp中的数据可能被特定行为删除，但是还是推荐在系统启动是删除
+   /tmp当中文件和目录。
 
    FHS added this recommendation on the basis of historical
    precedent and common practice, but did not make it a
    requirement because system administration is not within the
    scope of this standard.
+   FHS根据历史上的先例和通常的做法增加了这项建议，
+   但没有将其作为一项要求，
+   因为系统管理不在本标准的范围之内。
      __________________________________________________________
 
    ^[1] Command binaries that are not essential enough to place
